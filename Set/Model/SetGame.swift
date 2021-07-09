@@ -37,10 +37,19 @@ struct SetGame {
                 selectedCards += [cardsInPlay[index]]
                 if selectedCardsFormASet() {
                     matchedCards = selectedCards
+                    selectedCards.removeAll()
                 }
             } else {
                 selectedCards.removeAll()
                 selectedCards += [cardsInPlay[index]]
+            }
+        }
+    }
+    
+    mutating func flushMatches() {
+        for idx in cardsInPlay.indices {
+            if matchedCards.contains(cardsInPlay[idx]) {
+                cardsInPlay.remove(at: idx)
             }
         }
     }

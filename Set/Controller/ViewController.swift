@@ -33,8 +33,9 @@ class ViewController: UIViewController {
                 allCardButtons[cardIndex].setAttributes(cardinality: cardinality, colour: colour, shape: shape)
                 
                 if game.selectedCards.contains(game.cardsInPlay[cardIndex]) {
-                    allCardButtons[cardIndex].layer.borderWidth = 3.0
                     allCardButtons[cardIndex].layer.borderColor = UIColor.orange.cgColor
+                } else if game.matchedCards.contains(game.cardsInPlay[cardIndex]) {
+                    allCardButtons[cardIndex].layer.borderColor = UIColor.green.cgColor
                 } else {
                     allCardButtons[cardIndex].layer.borderColor = UIColor.clear.cgColor
                 }
@@ -50,6 +51,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cardButtonPressed(_ sender: CardButton) {
+        game.flushMatches()
         let idx = allCardButtons.firstIndex(of: sender)
         if let idx = idx {
             game.choseCard(at: idx)

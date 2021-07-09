@@ -28,6 +28,8 @@ class CardButton : UIButton {
     func style() {
         self.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         self.layer.cornerRadius = 5.0
+        self.layer.borderWidth = 3.0
+        self.layer.borderColor = UIColor.clear.cgColor
     }
     
     func setAttributes(cardinality : Int, colour: UIColor, shape : String) {
