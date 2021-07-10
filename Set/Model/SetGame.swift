@@ -12,12 +12,18 @@ struct SetGame {
     private var cards = [Card]()
     private(set) var cardsInPlay = [Card]()
     lazy private(set) var selectedCards =  [Card]()
-    private(set) var matchedCards = [Card]()
+    private(set) var mostRecentSet = [Card]()
+    private(set) var matchedCardsHistory = [Card]()
     private(set) var score = 0
     
     mutating func dealCards(_ N : Int = 3) {
         for _ in 1...N {
+            if cards.count > 0 {
                 cardsInPlay += [draw()]
+            } else {
+                print("No more cards left to draw")
+            }
+                
         }
     }
     
@@ -36,7 +42,7 @@ struct SetGame {
                 selectedCards += [cardsInPlay[index]]
                 if selectedCardsFormASet() {
                     score += 3
-                    matchedCards = selectedCards
+                    mostRecentSet = selectedCards
                     selectedCards.removeAll()
                 } else {
                     score -= 5
@@ -49,13 +55,16 @@ struct SetGame {
     }
     
     mutating func flushMatches() {
-        for idx in cardsInPlay.indices {
-            if matchedCards.contains(cardsInPlay[idx]),
-               let matchedIdx = matchedCards.firstIndex(of: cardsInPlay[idx]){
-                cardsInPlay[idx] = draw()
-                matchedCards.remove(at: matchedIdx)
-                
+        if !mostRecentSet.isEmpty {
+            for recentlyMatchedCard in mostRecentSet {
+                if let idx = cardsInPlay.firstIndex(of: recentlyMatchedCard) {
+                    if cards.count > 0 {
+                        cardsInPlay[idx] = draw()
+                    }
+                }
             }
+            matchedCardsHistory += mostRecentSet
+            mostRecentSet = []
         }
     }
     
@@ -90,18 +99,13 @@ struct SetGame {
     }
     
     
+//    // Tester Init
 //    init() {
 //        var id = 0
 //        let allCases = Card.PermissableValue.allCases
-//        for cardinality in allCases {
-//            for colour in allCases {
-//                for shape in allCases {
-//                    for shading in allCases {
-//                        cards.append(Card(cardinality: Card.PermissableValue.A, colour: colour, shape: shape, shading: Card.PermissableValue.A, id: id))
-//                        id += 1
-//                    }
-//                }
-//            }
+//        for _ in 0...29 {
+//            cards.append(Card(cardinality: Card.PermissableValue.A, colour: Card.PermissableValue.A, shape: Card.PermissableValue.A, shading: Card.PermissableValue.A, id: id))
+//            id += 1
 //        }
 //        dealCards(12)
 //    }

@@ -27,12 +27,15 @@ class ViewController: UIViewController {
     func updateViewAccordingToModel() {
         let numberOfCardsToDisplay = game.cardsInPlay.count
         for cardIndex in 0..<allCardButtons.count {
+            let relevantButton = allCardButtons[cardIndex]
+            relevantButton.isEnabled = true
+            relevantButton.alpha = 100.0
             if cardIndex < numberOfCardsToDisplay {
                 let card = game.cardsInPlay[cardIndex]
-                let releveantButton = allCardButtons[cardIndex]
-                displayCard(card, on: releveantButton)
+                displayCard(card, on: relevantButton)
             } else {
-                allCardButtons[cardIndex].isHidden = true
+                relevantButton.isEnabled = false
+                relevantButton.alpha = 0.0
             }
         }
         scoreLabel.text = "Score: \(game.score)"
@@ -42,40 +45,50 @@ class ViewController: UIViewController {
         let (text, attributes) = getAttributeTuple(for: card)
         button.setAttributes(text, attributes)
         
-        if game.matchedCards.contains(card) {
+        if game.mostRecentSet.contains(card) {
             button.showAsMatched(true)
         } else if game.selectedCards.contains(card) {
             button.showAsSelected(true)
         } else {
             button.showAsSelected(false)
         }
-
         button.isHidden = false
+        
+        if game.matchedCardsHistory.contains(card) {
+            button.isEnabled = false
+            button.alpha = 0.0
+        }
     }
     
     @IBAction func dealPressed(_ sender: DealButton) {
         game.dealCards()
         updateViewAccordingToModel()
-        if game.cardsInPlay.count >= 24 {
+        if game.cardsInPlay.count >= MAX_NUMBER_OF_CARDS_ON_TABLE {
             sender.shouldEnable(false)
         }
     }
     
     @IBAction func newGamesPressed(_ sender: UIButton) {
         game = SetGame()
+        for button in allCardButtons {
+            button.isEnabled = true
+            button.alpha = 100.0
+        }
+        dealButton.shouldEnable(true)
         updateViewAccordingToModel()
-
+        
     }
     
     @IBAction func cardButtonPressed(_ sender: CardButton) {
         game.flushMatches()
         let idx = allCardButtons.firstIndex(of: sender)
+        
         if let idx = idx {
+            print(idx)
             game.choseCard(at: idx)
             updateViewAccordingToModel()
         }
     }
-    
     
     func getAttributeTuple(for card : Card) -> (String, [NSAttributedString.Key: Any]) {
         let shapes = ["●", "▲", "■"]

@@ -31,6 +31,7 @@ struct Card : CustomStringConvertible, Equatable {
     
     static func ==(lhs: Card, rhs: Card) -> Bool {
         return (
+
             (lhs.cardinality == rhs.cardinality) &&
             (lhs.colour == rhs.colour) &&
             (lhs.shape == rhs.shape) &&
