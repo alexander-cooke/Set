@@ -8,17 +8,16 @@
 import Foundation
 
 struct SetGame {
-    let MAX_NUMBER_OF_CARDS_ON_TABLE = 24
+
     private var cards = [Card]()
     private(set) var cardsInPlay = [Card]()
     lazy private(set) var selectedCards =  [Card]()
     private(set) var matchedCards = [Card]()
+    private(set) var score = 0
     
     mutating func dealCards(_ N : Int = 3) {
         for _ in 1...N {
-            if cardsInPlay.count + 1 <= MAX_NUMBER_OF_CARDS_ON_TABLE {
                 cardsInPlay += [draw()]
-            }
         }
     }
     
@@ -36,8 +35,11 @@ struct SetGame {
             } else if selectedCards.count == 2 {
                 selectedCards += [cardsInPlay[index]]
                 if selectedCardsFormASet() {
+                    score += 3
                     matchedCards = selectedCards
                     selectedCards.removeAll()
+                } else {
+                    score -= 5
                 }
             } else {
                 selectedCards.removeAll()
@@ -48,8 +50,11 @@ struct SetGame {
     
     mutating func flushMatches() {
         for idx in cardsInPlay.indices {
-            if matchedCards.contains(cardsInPlay[idx]) {
-                cardsInPlay.remove(at: idx)
+            if matchedCards.contains(cardsInPlay[idx]),
+               let matchedIdx = matchedCards.firstIndex(of: cardsInPlay[idx]){
+                cardsInPlay[idx] = draw()
+                matchedCards.remove(at: matchedIdx)
+                
             }
         }
     }
@@ -61,9 +66,9 @@ struct SetGame {
         arrayOfSets.append(Set(arrayLiteral: selectedCards[0].colour, selectedCards[1].colour, selectedCards[2].colour))
         arrayOfSets.append(Set(arrayLiteral: selectedCards[0].shape, selectedCards[1].shape, selectedCards[2].shape))
         arrayOfSets.append(Set(arrayLiteral: selectedCards[0].shading, selectedCards[1].shading, selectedCards[2].shading))
-
+        
         for set in arrayOfSets {
-            if set.count != 1 || set.count != 3 {
+            if set.count != 1 && set.count != 3 {
                 theseCardsFormASet = false
             }
         }
@@ -83,6 +88,23 @@ struct SetGame {
         }
         dealCards(12)
     }
+    
+    
+//    init() {
+//        var id = 0
+//        let allCases = Card.PermissableValue.allCases
+//        for cardinality in allCases {
+//            for colour in allCases {
+//                for shape in allCases {
+//                    for shading in allCases {
+//                        cards.append(Card(cardinality: Card.PermissableValue.A, colour: colour, shape: shape, shading: Card.PermissableValue.A, id: id))
+//                        id += 1
+//                    }
+//                }
+//            }
+//        }
+//        dealCards(12)
+//    }
 }
 
 extension Int {

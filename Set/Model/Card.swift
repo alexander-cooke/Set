@@ -12,6 +12,7 @@ struct Card : CustomStringConvertible, Equatable {
     let colour : PermissableValue
     let shape : PermissableValue
     let shading : PermissableValue
+//    let id : Int
     
     enum PermissableValue : CaseIterable {
         case A
@@ -34,6 +35,7 @@ struct Card : CustomStringConvertible, Equatable {
             (lhs.colour == rhs.colour) &&
             (lhs.shape == rhs.shape) &&
             (lhs.shading == rhs.shading)
+//            && (lhs.id == rhs.id)
         )
     }
 }

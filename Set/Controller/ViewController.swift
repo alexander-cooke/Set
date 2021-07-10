@@ -13,7 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet private var mainStacks: [UIStackView]!
     @IBOutlet private var orientationDependentStacks: [UIStackView]!
     @IBOutlet private var orientationDependentCards: [UIButton]!
+    @IBOutlet var dealButton: DealButton!
+    @IBOutlet var scoreLabel: UILabel!
     
+    let MAX_NUMBER_OF_CARDS_ON_TABLE = 24
     var game = SetGame()
     
     override func viewDidLoad() {
@@ -24,13 +27,12 @@ class ViewController: UIViewController {
     
     func updateViewAccordingToModel() {
         let numberOfCardsToDisplay = game.cardsInPlay.count
-        print(numberOfCardsToDisplay)
         for cardIndex in 0..<allCardButtons.count {
             if cardIndex < numberOfCardsToDisplay {
                 let card = game.cardsInPlay[cardIndex]
-                let (cardinality, colour, shape) = getAttributeTuple(for: card)
+                let (cardinality, colour, shape, shading) = getAttributeTuple(for: card)
                 allCardButtons[cardIndex].isHidden = false
-                allCardButtons[cardIndex].setAttributes(cardinality: cardinality, colour: colour, shape: shape)
+                allCardButtons[cardIndex].setAttributes(cardinality: cardinality, colour: colour, shape: shape, shading: shading)
                 
                 if game.selectedCards.contains(game.cardsInPlay[cardIndex]) {
                     allCardButtons[cardIndex].layer.borderColor = UIColor.orange.cgColor
@@ -43,11 +45,29 @@ class ViewController: UIViewController {
                 allCardButtons[cardIndex].isHidden = true
             }
         }
+        scoreLabel.text = "Score: \(game.score)"
     }
     
     @IBAction func deal3MorePressed(_ sender: UIButton) {
-        game.dealCards()
+        if game.cardsInPlay.count + 3 <= 24 {
+            game.dealCards()
+            updateViewAccordingToModel()
+        }
+        
+        if game.cardsInPlay.count == 24 {
+            sender.backgroundColor = UIColor.darkGray
+            sender.setTitleColor(UIColor.lightGray, for: .normal)
+            sender.isEnabled = false
+        }
+
+    }
+    
+    @IBAction func newGamesPressed(_ sender: UIButton) {
+        game = SetGame()
         updateViewAccordingToModel()
+        dealButton.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1).withAlphaComponent(0.70)
+        dealButton.isEnabled = true
+        dealButton.setTitleColor(.white, for: .normal)
     }
     
     @IBAction func cardButtonPressed(_ sender: CardButton) {
@@ -60,11 +80,12 @@ class ViewController: UIViewController {
     }
     
     
-    func getAttributeTuple(for card : Card) -> (Int, UIColor, String) {
+    func getAttributeTuple(for card : Card) -> (Int, UIColor, String, Shading) {
         let colour = getColourValue(of: card)
         let shape = getShapeValue(of: card)
         let cardinality = getCardinalityValue(of: card)
-        return (cardinality, colour, shape)
+        let shading = getShadingValue(of: card)
+        return (cardinality, colour, shape, shading)
     }
     
     func getColourValue(of card : Card) -> UIColor {
@@ -97,6 +118,23 @@ class ViewController: UIViewController {
             return 2
         case .C:
             return 3
+        }
+    }
+    
+    enum Shading {
+        case fill
+        case hollow
+        case striped
+    }
+    
+    func getShadingValue(of card: Card) -> Shading {
+        switch card.shading {
+        case .A:
+            return Shading.fill
+        case .B:
+            return Shading.hollow
+        case .C:
+            return Shading.striped
         }
     }
     

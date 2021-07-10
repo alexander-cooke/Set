@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA019FB52699667100F56B38 /* DealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA019FB42699667100F56B38 /* DealButton.swift */; };
 		FA30B7692697EEB000961302 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B7682697EEB000961302 /* CardButton.swift */; };
 		FA30B7722698064200961302 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B7712698064200961302 /* SetGame.swift */; };
 		FA30B775269806B500961302 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B774269806B500961302 /* Card.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA019FB42699667100F56B38 /* DealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealButton.swift; sourceTree = "<group>"; };
 		FA30B7682697EEB000961302 /* CardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButton.swift; sourceTree = "<group>"; };
 		FA30B7712698064200961302 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		FA30B774269806B500961302 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				FAEC016926971F8200F9EF86 /* Main.storyboard */,
 				FA30B7682697EEB000961302 /* CardButton.swift */,
+				FA019FB42699667100F56B38 /* DealButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				FA30B775269806B500961302 /* Card.swift in Sources */,
 				FA30B7692697EEB000961302 /* CardButton.swift in Sources */,
 				FAEC016826971F8200F9EF86 /* ViewController.swift in Sources */,
+				FA019FB52699667100F56B38 /* DealButton.swift in Sources */,
 				FAEC016426971F8200F9EF86 /* AppDelegate.swift in Sources */,
 				FAEC016626971F8200F9EF86 /* SceneDelegate.swift in Sources */,
 			);

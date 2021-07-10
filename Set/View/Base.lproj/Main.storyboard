@@ -17,28 +17,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4bk-yc-q85" userLabel="stackContainer">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                                <rect key="frame" x="20" y="44" width="374" height="768"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="rLH-Ex-o6n" userLabel="stackHeader">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="101"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6D-et-bV4" userLabel="ScoreLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="63.5" height="93.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="63.5" height="101"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e68-zw-i68" userLabel="newGameButton">
-                                                <rect key="frame" x="299" y="0.0" width="75" height="93.5"/>
+                                                <rect key="frame" x="299" y="0.0" width="75" height="101"/>
                                                 <state key="normal" title="New Game"/>
+                                                <connections>
+                                                    <action selector="newGamesPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dl8-so-18r"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1sR-2f-7n1" userLabel="stackRow1">
-                                        <rect key="frame" x="0.0" y="103.5" width="374" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="111" width="374" height="101.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9h2-4C-PLk" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -46,7 +49,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEi-od-6aD" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="98.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -54,7 +57,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcB-Nj-VFs" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="197" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -62,7 +65,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWd-iw-wiN" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="295.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -72,10 +75,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TwI-m6-jMr" userLabel="stackRow2">
-                                        <rect key="frame" x="0.0" y="207" width="374" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="222.5" width="374" height="101"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgQ-XF-WYk" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -83,7 +86,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rch-kF-huC" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="98.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -91,7 +94,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4Y-vF-ytD" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="197" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -99,7 +102,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUT-mz-0G6" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="295.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -109,10 +112,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uYQ-Ns-8br" userLabel="stackRow3">
-                                        <rect key="frame" x="0.0" y="310.5" width="374" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="333.5" width="374" height="101"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InV-yx-K12" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -120,7 +123,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRQ-69-8MD" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="98.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -128,7 +131,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8m-Pb-4dy" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="197" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -136,7 +139,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-Y2-oAL" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="295.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -146,10 +149,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jwf-tV-C2F" userLabel="stackRow4">
-                                        <rect key="frame" x="0.0" y="414" width="374" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="444.5" width="374" height="101"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErD-LR-w1g" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -157,7 +160,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bF-Jp-zC1" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="98.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -165,7 +168,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTl-pO-9ad" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="197" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -173,7 +176,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTP-hX-nL1" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="295.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="?"/>
                                                 <connections>
@@ -183,10 +186,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tbN-QD-K9G" userLabel="stackRow5">
-                                        <rect key="frame" x="0.0" y="517.5" width="374" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="555.5" width="374" height="101.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mco-hu-Kck" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="21" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="A"/>
                                                 <connections>
@@ -194,7 +197,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6LX-Ee-uCz" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="98.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="98.5" y="21" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="B"/>
                                                 <connections>
@@ -202,7 +205,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNr-pz-A4c" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="197" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="197" y="21" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="C"/>
                                                 <connections>
@@ -210,7 +213,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jka-fb-pq6" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="295.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="295.5" y="21" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="D"/>
                                                 <connections>
@@ -220,10 +223,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bdN-Zz-64F" userLabel="stackRow6">
-                                        <rect key="frame" x="0.0" y="621" width="374" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="667" width="374" height="101"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2b-HT-R1l" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="E"/>
                                                 <connections>
@@ -231,7 +234,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zU-XT-RlD" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="98.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="F"/>
                                                 <connections>
@@ -239,7 +242,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3Q-cq-MM7" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="197" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="G"/>
                                                 <connections>
@@ -247,7 +250,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yS7-cD-nRT" customClass="CardButton" customModule="Set" customModuleProvider="target">
-                                                <rect key="frame" x="295.5" y="17" width="78.5" height="60"/>
+                                                <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="H"/>
                                                 <connections>
@@ -256,26 +259,36 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-O4-H8U" userLabel="dealButton">
-                                        <rect key="frame" x="0.0" y="724.5" width="374" height="93.5"/>
-                                        <state key="normal" title="Deal 3 More Cards"/>
-                                        <connections>
-                                            <action selector="deal3MorePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3jX-Bt-TG0"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-O4-H8U" userLabel="dealButton" customClass="DealButton" customModule="Set" customModuleProvider="target">
+                                <rect key="frame" x="87" y="832" width="240" height="30"/>
+                                <color key="backgroundColor" red="0.1550482373719835" green="0.42972715736040612" blue="0.025939195015809793" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="zm0-sb-h8t"/>
+                                </constraints>
+                                <state key="normal" title="Deal 3 More Cards">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="deal3MorePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3jX-Bt-TG0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4bk-yc-q85" secondAttribute="trailing" constant="20" id="DJY-HC-qi0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4bk-yc-q85" secondAttribute="bottom" id="G39-vQ-Afv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Qr8-O4-H8U" secondAttribute="bottom" id="F3R-C6-aLP"/>
+                            <constraint firstItem="Qr8-O4-H8U" firstAttribute="top" secondItem="4bk-yc-q85" secondAttribute="bottom" constant="20" id="G39-vQ-Afv"/>
                             <constraint firstItem="4bk-yc-q85" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hy8-vc-ukS"/>
                             <constraint firstItem="4bk-yc-q85" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="lhe-TK-AdG"/>
+                            <constraint firstItem="Qr8-O4-H8U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="quC-JF-ayR"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dealButton" destination="Qr8-O4-H8U" id="5lK-90-sEj"/>
+                        <outlet property="scoreLabel" destination="j6D-et-bV4" id="MHi-SB-OA9"/>
                         <outletCollection property="orientationDependentCards" destination="mco-hu-Kck" collectionClass="NSMutableArray" id="7u2-la-XIj"/>
                         <outletCollection property="orientationDependentCards" destination="6LX-Ee-uCz" collectionClass="NSMutableArray" id="hlZ-wa-WtZ"/>
                         <outletCollection property="orientationDependentCards" destination="YNr-pz-A4c" collectionClass="NSMutableArray" id="5B5-W1-V7L"/>
