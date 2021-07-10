@@ -14,8 +14,8 @@ struct Card : CustomStringConvertible, Equatable {
     let shading : PermissableValue
 //    let id : Int
     
-    enum PermissableValue : CaseIterable {
-        case A
+    enum PermissableValue : Int, CaseIterable {
+        case A = 0
         case B
         case C
     }

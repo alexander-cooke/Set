@@ -43,7 +43,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9h2-4C-PLk" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CK9-iK-bV6"/>
                                                 </connections>
@@ -51,7 +50,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEi-od-6aD" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hnk-Xp-eyA"/>
                                                 </connections>
@@ -59,7 +57,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcB-Nj-VFs" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rja-yE-Ix8"/>
                                                 </connections>
@@ -67,7 +64,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWd-iw-wiN" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cZs-qH-lnd"/>
                                                 </connections>
@@ -80,7 +76,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgQ-XF-WYk" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4yq-xC-3JQ"/>
                                                 </connections>
@@ -88,7 +83,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rch-kF-huC" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xnx-j8-SkA"/>
                                                 </connections>
@@ -96,7 +90,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4Y-vF-ytD" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5JB-cD-bcw"/>
                                                 </connections>
@@ -104,7 +97,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUT-mz-0G6" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xfb-Ik-v7O"/>
                                                 </connections>
@@ -117,7 +109,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InV-yx-K12" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3UX-cj-ayI"/>
                                                 </connections>
@@ -125,7 +116,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRQ-69-8MD" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EeE-YF-hj6"/>
                                                 </connections>
@@ -133,7 +123,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8m-Pb-4dy" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1k3-06-Yuc"/>
                                                 </connections>
@@ -141,7 +130,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-Y2-oAL" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FnT-hp-lBh"/>
                                                 </connections>
@@ -154,7 +142,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErD-LR-w1g" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nKJ-4g-XP3"/>
                                                 </connections>
@@ -162,7 +149,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bF-Jp-zC1" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jQN-JP-jgW"/>
                                                 </connections>
@@ -170,7 +156,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTl-pO-9ad" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rOk-ZR-W7H"/>
                                                 </connections>
@@ -178,7 +163,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTP-hX-nL1" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="?"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FvZ-De-aMN"/>
                                                 </connections>
@@ -191,7 +175,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mco-hu-Kck" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="21" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="A"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EKV-ei-nhc"/>
                                                 </connections>
@@ -199,7 +182,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6LX-Ee-uCz" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="98.5" y="21" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="B"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WRS-JX-pZA"/>
                                                 </connections>
@@ -207,7 +189,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNr-pz-A4c" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="197" y="21" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="C"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="haW-ON-j9O"/>
                                                 </connections>
@@ -215,7 +196,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jka-fb-pq6" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="295.5" y="21" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="D"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZEu-Uq-zah"/>
                                                 </connections>
@@ -228,7 +208,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2b-HT-R1l" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="E"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Llm-Nu-WWK"/>
                                                 </connections>
@@ -236,7 +215,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zU-XT-RlD" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="98.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="F"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oTE-Kl-lxA"/>
                                                 </connections>
@@ -244,7 +222,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3Q-cq-MM7" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="197" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="G"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y9E-Dg-htR"/>
                                                 </connections>
@@ -252,7 +229,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yS7-cD-nRT" customClass="CardButton" customModule="Set" customModuleProvider="target">
                                                 <rect key="frame" x="295.5" y="20.5" width="78.5" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <state key="normal" title="H"/>
                                                 <connections>
                                                     <action selector="cardButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pln-gu-u4Y"/>
                                                 </connections>
@@ -271,7 +247,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="deal3MorePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3jX-Bt-TG0"/>
+                                    <action selector="dealPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9jp-0i-HZ5"/>
                                 </connections>
                             </button>
                         </subviews>

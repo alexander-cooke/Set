@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet private var allCardButtons: [CardButton]!
-    
     @IBOutlet private var mainStacks: [UIStackView]!
     @IBOutlet private var orientationDependentStacks: [UIStackView]!
     @IBOutlet private var orientationDependentCards: [UIButton]!
@@ -30,17 +29,8 @@ class ViewController: UIViewController {
         for cardIndex in 0..<allCardButtons.count {
             if cardIndex < numberOfCardsToDisplay {
                 let card = game.cardsInPlay[cardIndex]
-                let (cardinality, colour, shape, shading) = getAttributeTuple(for: card)
-                allCardButtons[cardIndex].isHidden = false
-                allCardButtons[cardIndex].setAttributes(cardinality: cardinality, colour: colour, shape: shape, shading: shading)
-                
-                if game.selectedCards.contains(game.cardsInPlay[cardIndex]) {
-                    allCardButtons[cardIndex].layer.borderColor = UIColor.orange.cgColor
-                } else if game.matchedCards.contains(game.cardsInPlay[cardIndex]) {
-                    allCardButtons[cardIndex].layer.borderColor = UIColor.green.cgColor
-                } else {
-                    allCardButtons[cardIndex].layer.borderColor = UIColor.clear.cgColor
-                }
+                let releveantButton = allCardButtons[cardIndex]
+                displayCard(card, on: releveantButton)
             } else {
                 allCardButtons[cardIndex].isHidden = true
             }
@@ -48,26 +38,33 @@ class ViewController: UIViewController {
         scoreLabel.text = "Score: \(game.score)"
     }
     
-    @IBAction func deal3MorePressed(_ sender: UIButton) {
-        if game.cardsInPlay.count + 3 <= 24 {
-            game.dealCards()
-            updateViewAccordingToModel()
-        }
+    private func displayCard(_ card : Card, on button : CardButton) {
+        let (text, attributes) = getAttributeTuple(for: card)
+        button.setAttributes(text, attributes)
         
-        if game.cardsInPlay.count == 24 {
-            sender.backgroundColor = UIColor.darkGray
-            sender.setTitleColor(UIColor.lightGray, for: .normal)
-            sender.isEnabled = false
+        if game.matchedCards.contains(card) {
+            button.showAsMatched(true)
+        } else if game.selectedCards.contains(card) {
+            button.showAsSelected(true)
+        } else {
+            button.showAsSelected(false)
         }
 
+        button.isHidden = false
+    }
+    
+    @IBAction func dealPressed(_ sender: DealButton) {
+        game.dealCards()
+        updateViewAccordingToModel()
+        if game.cardsInPlay.count >= 24 {
+            sender.shouldEnable(false)
+        }
     }
     
     @IBAction func newGamesPressed(_ sender: UIButton) {
         game = SetGame()
         updateViewAccordingToModel()
-        dealButton.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1).withAlphaComponent(0.70)
-        dealButton.isEnabled = true
-        dealButton.setTitleColor(.white, for: .normal)
+
     }
     
     @IBAction func cardButtonPressed(_ sender: CardButton) {
@@ -80,62 +77,24 @@ class ViewController: UIViewController {
     }
     
     
-    func getAttributeTuple(for card : Card) -> (Int, UIColor, String, Shading) {
-        let colour = getColourValue(of: card)
-        let shape = getShapeValue(of: card)
-        let cardinality = getCardinalityValue(of: card)
-        let shading = getShadingValue(of: card)
-        return (cardinality, colour, shape, shading)
-    }
-    
-    func getColourValue(of card : Card) -> UIColor {
-        switch card.colour {
-        case .A:
-            return #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-        case .B:
-            return #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        case .C:
-            return #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-        }
-    }
-    
-    func getShapeValue(of card : Card) -> String {
-        switch card.shape {
-        case .A:
-            return "●"
-        case .B:
-            return "▲"
-        case .C:
-            return "■"
-        }
-    }
-    
-    func getCardinalityValue(of card : Card) -> Int {
-        switch card.cardinality {
-        case .A:
-            return 1
-        case .B:
-            return 2
-        case .C:
-            return 3
-        }
-    }
-    
-    enum Shading {
-        case fill
-        case hollow
-        case striped
-    }
-    
-    func getShadingValue(of card: Card) -> Shading {
+    func getAttributeTuple(for card : Card) -> (String, [NSAttributedString.Key: Any]) {
+        let shapes = ["●", "▲", "■"]
+        let shape = shapes[card.shape.rawValue]
+        let cardinality = card.cardinality.rawValue + 1
+        let text = String(repeating: shape, count: cardinality)
+        
+        let colours = [#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)]
+        let colour = colours[card.colour.rawValue]
+        var attributes = [NSAttributedString.Key: Any]()
         switch card.shading {
         case .A:
-            return Shading.fill
+            attributes = [.foregroundColor: colour]
         case .B:
-            return Shading.hollow
+            attributes = [.foregroundColor: colour, .strokeWidth: 10]
         case .C:
-            return Shading.striped
+            attributes = [.foregroundColor: colour.withAlphaComponent(0.30)]
         }
+        return (text, attributes)
     }
     
 //MARK: Handling Orientation (Extra)
@@ -170,8 +129,6 @@ class ViewController: UIViewController {
             stack.isHidden = hide
         }
     }
-
-
 }
 
 
