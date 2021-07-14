@@ -31,14 +31,32 @@ class SetContainerView: UIView {
     }
     
     override func layoutSubviews() {
-        print(idealGridSize)
+        super.layoutSubviews()
+        let (numRows, numColumns) = idealGridSize
+        let grid = Grid(layout: .dimensions(rowCount: numRows, columnCount: numColumns), frame: bounds)
+
+        var idx = 0
+        for row in 0..<numRows {
+            for column in 0..<numColumns {
+                if let cellFrame = grid[row, column]{
+                    setCardViews[idx].frame = cellFrame.insetBy(dx: Constants.padding, dy: Constants.padding)
+                    idx += 1
+                }
+            }
+        }
     }
 }
 
 extension SetContainerView {
     private struct Constants {
-        static let MAX_FACTOR_THAT_AXIS_CAN_DIFFER_BY = 5.0
+        static let padding : CGFloat = 10
+//        static let ratioOfInsetToBoundsHeight: CGFloat = 5.0
+        
     }
+    
+//    private var cardInsetSize : CGFloat {
+//        bounds.size.height * Constants.ratioOfInsetToBoundsHeight
+//    }
 }
 
 extension Int {

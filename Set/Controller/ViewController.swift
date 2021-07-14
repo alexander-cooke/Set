@@ -12,7 +12,11 @@ class ViewController: UIViewController {
     @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var setContainer: SetContainerView! {
         didSet {
-            setContainer.setCardViews = Array.init(repeating: SetCardView(), count: 48)
+            var setCards = [SetCardView]()
+            for _ in 0..<24 {
+                setCards += [SetCardView()]
+            }
+            setContainer.setCardViews = setCards
         }
     }
     
