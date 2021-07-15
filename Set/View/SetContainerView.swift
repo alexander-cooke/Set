@@ -25,9 +25,11 @@ class SetContainerView: UIView {
         let complementFactor = setCardViews.count / middleFactor
         let more = middleFactor > complementFactor ? middleFactor : complementFactor
         let less = middleFactor > complementFactor ? complementFactor : middleFactor
-        
-        return UIDevice.current.orientation.isPortrait ? (rows: more, columns: less) :
-                                                         (rows: less, columns : more)
+        return isPortrait ? (rows: more, columns: less) : (rows: less, columns : more)
+    }
+    
+    private var isPortrait : Bool {
+        return UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
     }
     
     override func layoutSubviews() {
@@ -39,7 +41,7 @@ class SetContainerView: UIView {
         for row in 0..<numRows {
             for column in 0..<numColumns {
                 if let cellFrame = grid[row, column]{
-                    setCardViews[idx].frame = cellFrame.insetBy(dx: Constants.padding, dy: Constants.padding)
+                    setCardViews[idx].frame = cellFrame.insetBy(dx: Constants.cardInsetAmount, dy: Constants.cardInsetAmount)
                     idx += 1
                 }
             }
@@ -49,7 +51,7 @@ class SetContainerView: UIView {
 
 extension SetContainerView {
     private struct Constants {
-        static let padding : CGFloat = 10
+        static let cardInsetAmount : CGFloat = 10
 //        static let ratioOfInsetToBoundsHeight: CGFloat = 5.0
         
     }

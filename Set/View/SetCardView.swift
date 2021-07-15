@@ -36,11 +36,11 @@ class SetCardView: UIButton {
         #colorLiteral(red: 0.05098039216, green: 0.1725490196, blue: 0.3294117647, alpha: 1).setFill()
         roundRect.fill()
         
-//        let borderPath = roundRect
-//        let borderColour = isSelected ? #colorLiteral(red: 0.9647058824, green: 0.3176470588, blue: 0.1137254902, alpha: 1) : UIColor.clear
-//        borderColour.setStroke()
-//        borderPath.lineWidth = 10
-//        borderPath.stroke()
+        let borderPath = roundRect
+        let borderColour = isSelected ? #colorLiteral(red: 0.9647058824, green: 0.3176470588, blue: 0.1137254902, alpha: 1) : UIColor.clear
+        borderColour.setStroke()
+        borderPath.lineWidth = 10
+        borderPath.stroke()
         
 //        self.layer.borderWidth = 1.0
 //        self.layer.borderColor =

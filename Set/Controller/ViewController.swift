@@ -27,8 +27,8 @@ class ViewController: UIViewController {
             cardView.colour = Constants.colours[card.colour.rawValue]
             cardView.shape = Constants.shapes[card.shape.rawValue]
             cardView.shading = Constants.shading[card.shading.rawValue]
-//            cardView.isSelected = game.selectedCards.contains(card)
-//            cardView.isMatched = game.mostRecentSet.contains(card)
+            cardView.isSelected = game.selectedCards.contains(card)
+            cardView.isMatched = game.mostRecentSet.contains(card)
             cardView.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
             cardViews.append(cardView)
         }
@@ -37,14 +37,14 @@ class ViewController: UIViewController {
     }
     
     @objc func cardTapped(_ sender: SetCardView) {
-//        game.flushMatches()
-//        let idx = setContainer.setCardViews.firstIndex(of: sender)
-//
-//        if let idx = idx {
-////            game.choseCard(at: idx)
-//        }
-        updateViewAccordingToModel()
+        game.flushMatches()
+        let idx = setContainer.setCardViews.firstIndex(of: sender)
 
+        if let idx = idx {
+            game.choseCard(at: idx)
+            updateViewAccordingToModel()
+
+        }
     }
     
     //
