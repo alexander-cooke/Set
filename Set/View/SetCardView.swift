@@ -13,12 +13,12 @@
 
 import UIKit
 
-class SetCardView: UIView {
-    let colours = [#colorLiteral(red: 1, green: 0.7058823529, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.6509803922, blue: 0.9294117647, alpha: 1), #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1)]
-    var number : Int = 3 {didSet{setNeedsDisplay()}}
-    lazy var colour : UIColor = colours[1] {didSet{setNeedsDisplay()}}
-    var shape : Shape = .triangle {didSet{setNeedsDisplay()}}
+class SetCardView: UIButton {
+    var number : Int = 1 {didSet{setNeedsDisplay()}}
+    var colour : UIColor = UIColor.white {didSet{setNeedsDisplay()}}
+    var shape : Shape = .square {didSet{setNeedsDisplay()}}
     var shading : Shading = .fill {didSet{setNeedsDisplay()}}
+    var isMatched : Bool = false {didSet{setNeedsDisplay()}}
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,6 +36,16 @@ class SetCardView: UIView {
         #colorLiteral(red: 0.05098039216, green: 0.1725490196, blue: 0.3294117647, alpha: 1).setFill()
         roundRect.fill()
         
+//        let borderPath = roundRect
+//        let borderColour = isSelected ? #colorLiteral(red: 0.9647058824, green: 0.3176470588, blue: 0.1137254902, alpha: 1) : UIColor.clear
+//        borderColour.setStroke()
+//        borderPath.lineWidth = 10
+//        borderPath.stroke()
+        
+//        self.layer.borderWidth = 1.0
+//        self.layer.borderColor =
+        
+        
         // Get grid size based on cardinality and dimensions of bounds
         let (rows, columns) = bounds.width > bounds.height ? (1, number) : (number, 1)
         let grid = Grid(layout: .dimensions(rowCount: rows, columnCount: columns), frame: symbolDrawingArea)
@@ -46,34 +56,67 @@ class SetCardView: UIView {
         }
     }
     
+    enum Shading {
+        case fill
+        case outline
+        case stripe
+    }
+    
     private func drawTheSymbol(in symbolFrame : CGRect) {
-        var shapeGraphic : UIBezierPath
-        switch shape {
-        case .circle:
-            shapeGraphic = makeCircle(in: symbolFrame)
-        case .square:
-            shapeGraphic = makeSquare(in: symbolFrame)
-        case .triangle:
-            shapeGraphic = makeTriangle(in: symbolFrame)
-        }
+        let path = makeShapePath(in: symbolFrame)
         
         switch shading {
         case .fill:
             colour.setFill()
-            shapeGraphic.fill()
+            path.fill()
         case .outline:
             colour.setStroke()
-            shapeGraphic.lineWidth = 2
-            shapeGraphic.stroke()
+            path.lineWidth = 2
+            path.stroke()
         case .stripe:
-            colour.setStroke()
-            shapeGraphic.stroke()
+            drawStriped(shape: path, in: symbolFrame)
         }
-        
-        
     }
     
-    private func makeCircle(in frame : CGRect) -> UIBezierPath {
+    private func drawStriped(shape path: UIBezierPath, in symbolFrame: CGRect) {
+        if let context = UIGraphicsGetCurrentContext() {
+            context.saveGState()
+            path.addClip()
+            let stripePath = UIBezierPath()
+            for yPosition in stride(from: symbolFrame.minY, through: symbolFrame.maxY, by: numberOfLines) {
+                stripePath.move(to: CGPoint(x: symbolFrame.minX, y: yPosition))
+                let endOfStripe = CGPoint(x: symbolFrame.maxX, y: yPosition)
+                stripePath.addLine(to: endOfStripe)
+            }
+            colour.setStroke()
+            stripePath.lineWidth = 1
+            stripePath.stroke()
+            path.lineWidth = 5
+            path.stroke()
+            context.restoreGState()
+        }
+    }
+    
+    enum Shape {
+        case circle
+        case square
+        case triangle
+    }
+    
+    private func makeShapePath(in symbolFrame: CGRect) -> UIBezierPath {
+        var shapeGraphic : UIBezierPath
+        switch shape {
+        case .circle:
+            shapeGraphic = makeCirclePath(in: symbolFrame)
+        case .square:
+            shapeGraphic = makeSquarePath(in: symbolFrame)
+        case .triangle:
+            shapeGraphic = makeTrianglePath(in: symbolFrame)
+        }
+        return shapeGraphic
+    }
+    
+    private func makeCirclePath(in frame : CGRect) -> UIBezierPath {
         let center = CGPoint(x: frame.midX, y: frame.midY)
         let radius = frame.height > frame.width ? frame.width / 2 : frame.height / 2
         return UIBezierPath(arcCenter: center,
@@ -83,7 +126,7 @@ class SetCardView: UIView {
                             clockwise: true)
     }
     
-    private func makeSquare(in frame: CGRect) -> UIBezierPath  {
+    private func makeSquarePath(in frame: CGRect) -> UIBezierPath  {
         let sideLength = frame.height > frame.width ? frame.width : frame.height
         let origin = CGPoint(x: frame.midX - sideLength / 2.0, y: frame.midY - sideLength / 2.0)
         let size = CGSize(width: sideLength, height: sideLength)
@@ -91,38 +134,34 @@ class SetCardView: UIView {
         return UIBezierPath(rect: square)
     }
     
-    private func makeTriangle(in frame: CGRect) -> UIBezierPath {
+    private func makeTrianglePath(in frame: CGRect) -> UIBezierPath {
         let trianglePath = UIBezierPath()
-        trianglePath.move(to: CGPoint(x: frame.midX, y: frame.minY))
-        let smallestDimension = frame.height > frame.width ? frame.width : frame.height
-        let nextPoint = CGPoint(x: frame.midX - smallestDimension / 2.0, y: frame.midY + smallestDimension )
-        trianglePath.addLine(to: nextPoint)
-        let finalPoint = CGPoint(x: frame.midX + smallestDimension / 2.0, y: frame.midY + smallestDimension)
-        trianglePath.addLine(to: finalPoint)
+        let triangleHeight = frame.height > frame.width ? frame.width : frame.height
+        let sideLength = (2 * triangleHeight) / sqrt(3.0)
+        let startingYPosition = CGFloat(frame.midY - 0.5 * triangleHeight)
+        let topPoint = CGPoint(x: frame.midX, y: startingYPosition)
+        trianglePath.move(to: topPoint)
+        let bottomLeftPoint = CGPoint(x: frame.midX - 0.5 * sideLength, y: startingYPosition + triangleHeight)
+        trianglePath.addLine(to: bottomLeftPoint)
+        let bottomRightPoint = CGPoint(x: frame.midX + 0.5 * sideLength, y: startingYPosition + triangleHeight)
+        trianglePath.addLine(to: bottomRightPoint)
         trianglePath.close()
         return trianglePath
-    }
-    
-    enum Shape {
-        case circle
-        case square
-        case triangle
-    }
-    
-    enum Shading {
-        case fill
-        case outline
-        case stripe
     }
 }
 
 extension SetCardView {
     private struct SizeRatios {
+        static let numberOfLinesRatio : CGFloat = 0.02
         static let drawingAreaToBoundsRatio: CGFloat = 0.8
         static let circleRadiusToBoundsSizeRatio: CGFloat = 0.5
         static let cornerRadiusToBoundsHeight : CGFloat = 0.06
         static let cornerFontSizeToBoundsHeight : CGFloat = 0.085
         static let cornerOffsetToCornerRadius: CGFloat = 0.33
+    }
+    
+    private var numberOfLines : CGFloat {
+        return bounds.height * SizeRatios.numberOfLinesRatio
     }
     
     private var interSymbolInset: CGSize {
