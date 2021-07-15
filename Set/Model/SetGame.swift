@@ -95,7 +95,7 @@ struct SetGame {
                 }
             }
         }
-        dealCards(12)
+        dealCards(24)
     }
     
     
