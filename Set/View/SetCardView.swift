@@ -18,7 +18,7 @@ class SetCardView: UIButton {
     var colour : UIColor = UIColor.white {didSet{setNeedsDisplay()}}
     var shape : Shape = .square {didSet{setNeedsDisplay()}}
     var shading : Shading = .fill {didSet{setNeedsDisplay()}}
-    var isMatched : Bool = false {didSet{setNeedsDisplay()}}
+    var isSelectedAndMatched : Bool = false {didSet{setNeedsDisplay()}}
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +38,7 @@ class SetCardView: UIButton {
         
         let borderPath = roundRect
         var borderColour = isSelected ? #colorLiteral(red: 0.9647058824, green: 0.3176470588, blue: 0.1137254902, alpha: 1) : UIColor.clear
-        borderColour = isMatched ? #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1) : borderColour
+        borderColour = isSelectedAndMatched ? #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1) : borderColour
         borderColour.setStroke()
         borderPath.lineWidth = 10
         borderPath.stroke()

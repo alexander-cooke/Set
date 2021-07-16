@@ -22,54 +22,83 @@ class ViewController: UIViewController {
     func updateViewAccordingToModel() {
         var cardViews = [SetCardView]()
         for card in game.cardsInPlay {
-            let cardView = SetCardView()
-            cardView.number = card.cardinality.rawValue + 1
-            cardView.colour = Constants.colours[card.colour.rawValue]
-            cardView.shape = Constants.shapes[card.shape.rawValue]
-            cardView.shading = Constants.shading[card.shading.rawValue]
-            cardView.isSelected = game.selectedCards.contains(card)
-            cardView.isMatched = game.mostRecentSet.contains(card)
-            cardView.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
+            let cardView = translateCardModelToView(using: card)
             cardViews.append(cardView)
         }
         setContainer.setCardViews = cardViews
         scoreLabel.text = "Score: \(game.score)"
-    }
-    
-    @objc func cardTapped(_ sender: SetCardView) {
-        game.flushMatches()
-        let idx = setContainer.setCardViews.firstIndex(of: sender)
-
-        if let idx = idx {
-            game.choseCard(at: idx)
-            updateViewAccordingToModel()
-
+        
+        if game.cardsInPlay.count >= Constants.maxCardsOnTable || game.deck.isEmpty {
+            dealButton.isEnabled = false
+            dealButton.backgroundColor =  #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            dealButton.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
         }
     }
     
-    //
-    //
-    //
-    //        for cardIndex in 0..<allCardButtons.count {
-    //            let relevantButton = allCardButtons[cardIndex]
-    //            relevantButton.isEnabled = true
-    //            relevantButton.alpha = 100.0
-    //            if cardIndex < numberOfCardsToDisplay {
-    //                let card = game.cardsInPlay[cardIndex]
-    //                displayCard(card, on: relevantButton)
-    //            } else {
-    //                relevantButton.isEnabled = false
-    //                relevantButton.alpha = 0.0
-    //            }
-    //        }
+    @objc func cardTapped(_ sender: SetCardView) {
+        let underlyingCardModel = translateCardViewToModel(using: sender)
+        let flushed = game.flushMatches()
+        
+        if !flushed.contains(underlyingCardModel) {
+            game.choose(card: underlyingCardModel)
+        }
+        updateViewAccordingToModel()
+    }
     
-//    @IBAction func cardButtonPressed(_ sender: CardButton) {
-//        game.flushMatches()
+//    let buttonIdx = setContainer.setCardViews.firstIndex(of: sender)
+//        if var buttonIdx = buttonIdx {
+//            let (ranOutOfCards, indexes) = game.flushMatches()
+//            if ranOutOfCards {
+//                print(indexes)
+//                switch buttonIdx {
+//                case (indexes[0] + 1)..<indexes[1]:
+//                    buttonIdx -= 1
+//                case (indexes[1] + 1)..<indexes[2]:
+//                    buttonIdx -= 2
+//                default:
+//                    buttonIdx -= 3
+//                }
+//            }
+    
+    private func translateCardViewToModel(using cardView : SetCardView) -> Card {
+        let cardinalityRaw = Card.PermissableValue.RawValue(cardView.number - 1)
+        let colourRaw = Card.PermissableValue.RawValue(Constants.colours.firstIndex(of: cardView.colour)!)
+        let shapeRaw = Card.PermissableValue.RawValue(Constants.shapes.firstIndex(of: cardView.shape)!)
+        let shadingRaw = Card.PermissableValue.RawValue(Constants.shading.firstIndex(of: cardView.shading)!)
+        
+        return Card(cardinality: Card.PermissableValue(rawValue: cardinalityRaw)!,
+                    colour: Card.PermissableValue(rawValue: colourRaw)!,
+                    shape: Card.PermissableValue(rawValue: shapeRaw)!,
+                    shading: Card.PermissableValue(rawValue: shadingRaw)!)
+    }
+    
+    private func translateCardModelToView(using card : Card) -> SetCardView {
+        let cardView = SetCardView()
+        cardView.number = card.cardinality.rawValue + 1
+        cardView.colour = Constants.colours[card.colour.rawValue]
+        cardView.shape = Constants.shapes[card.shape.rawValue]
+        cardView.shading = Constants.shading[card.shading.rawValue]
+        cardView.isSelected = game.selectedCards.contains(card)
+        cardView.isSelectedAndMatched = game.mostRecentSet.contains(card)
+        cardView.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
+        return cardView
+    }
 
-//    }
+    @IBAction func dealPressed(_ sender: DealButton) {
+        game.dealCards()
+        updateViewAccordingToModel()
+    }
+    
+    @IBAction func newGamesPressed(_ sender: UIButton) {
+        game = SetGame()
+        dealButton.isEnabled = true
+        dealButton.backgroundColor = #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1)
+        dealButton.setTitleColor(.white, for: .normal)
+        updateViewAccordingToModel()
+    }
     
     private struct Constants {
-        static let maxCardsOnTable = 24
+        static let maxCardsOnTable = 12
         static let colours = [#colorLiteral(red: 1, green: 0.7058823529, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.6509803922, blue: 0.9294117647, alpha: 1), #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1)]
         static let shapes = [SetCardView.Shape.circle,
                              SetCardView.Shape.square,
@@ -78,66 +107,6 @@ class ViewController: UIViewController {
                               SetCardView.Shading.outline,
                               SetCardView.Shading.stripe]
     }
-//
-//    private func displayCard(_ card : Card, on button : CardButton) {
-//        let (text, attributes) = getAttributeTuple(for: card)
-//        button.setAttributes(text, attributes)
-//
-//        if game.mostRecentSet.contains(card) {
-//            button.showAsMatched(true)
-//        } else if game.selectedCards.contains(card) {
-//            button.showAsSelected(true)
-//        } else {
-//            button.showAsSelected(false)
-//        }
-//        button.isHidden = false
-//
-//        if game.matchedCardsHistory.contains(card) {
-//            button.isEnabled = false
-//            button.alpha = 0.0
-//        }
-//    }
-//
-    @IBAction func dealPressed(_ sender: DealButton) {
-//        game.dealCards()
-//        updateViewAccordingToModel()
-//        if game.cardsInPlay.count >= MAX_NUMBER_OF_CARDS_ON_TABLE {
-//            sender.shouldEnable(false)
-//        }
-    }
-    
-    @IBAction func newGamesPressed(_ sender: UIButton) {
-//        game = SetGame()
-//        for button in allCardButtons {
-//            button.isEnabled = true
-//            button.alpha = 100.0
-//        }
-//        dealButton.shouldEnable(true)
-//        updateViewAccordingToModel()
-        
-    }
-    
-
-    
-//    func getAttributeTuple(for card : Card) -> (String, [NSAttributedString.Key: Any]) {
-//        let shapes = ["●", "▲", "■"]
-//        let shape = shapes[card.shape.rawValue]
-//        let cardinality = card.cardinality.rawValue + 1
-//        let text = String(repeating: shape, count: cardinality)
-//
-//        let colours = [#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)]
-//        let colour = colours[card.colour.rawValue]
-//        var attributes = [NSAttributedString.Key: Any]()
-//        switch card.shading {
-//        case .A:
-//            attributes = [.foregroundColor: colour]
-//        case .B:
-//            attributes = [.foregroundColor: colour, .strokeWidth: 10]
-//        case .C:
-//            attributes = [.foregroundColor: colour.withAlphaComponent(0.30)]
-//        }
-//        return (text, attributes)
-//    }
 }
 
 

@@ -16,28 +16,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rLH-Ex-o6n" userLabel="stackHeader">
-                                <rect key="frame" x="8" y="60" width="398" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="rLH-Ex-o6n" userLabel="stackHeader">
+                                <rect key="frame" x="8" y="59.999999999999993" width="398" height="27.666666666666664"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6D-et-bV4" userLabel="ScoreLabel">
-                                        <rect key="frame" x="0.0" y="5" width="63.666666666666664" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6D-et-bV4" userLabel="ScoreLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="89" height="27.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                        <color key="textColor" red="0.1058823529" green="0.14901960780000001" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e68-zw-i68" userLabel="newGameButton">
-                                        <rect key="frame" x="152.33333333333334" y="0.0" width="75" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e68-zw-i68" userLabel="newGameButton" customClass="DefaultButton" customModule="Set" customModuleProvider="target">
+                                        <rect key="frame" x="148" y="0.0" width="95" height="27.666666666666668"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                         <state key="normal" title="New Game"/>
                                         <connections>
                                             <action selector="newGamesPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dl8-so-18r"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-O4-H8U" userLabel="dealButton">
-                                        <rect key="frame" x="298" y="0.0" width="100" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-O4-H8U" userLabel="dealButton" customClass="DealButton" customModule="Set" customModuleProvider="target">
+                                        <rect key="frame" x="295" y="0.0" width="103" height="27.666666666666668"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="zm0-sb-h8t"/>
-                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                         <state key="normal" title="Deal 3 More">
                                             <color key="titleColor" systemColor="linkColor"/>
                                         </state>
@@ -46,9 +45,10 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ss-xS-FMt" userLabel="SetContainerView" customClass="SetContainerView" customModule="Set" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98" width="414" height="764"/>
+                                <rect key="frame" x="0.0" y="95.666666666666686" width="414" height="766.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
