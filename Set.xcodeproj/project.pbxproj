@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FA019FB52699667100F56B38 /* DealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA019FB42699667100F56B38 /* DealButton.swift */; };
-		FA019FBD269979B200F56B38 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA019FBC269979B200F56B38 /* DefaultButton.swift */; };
-		FA30B7692697EEB000961302 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B7682697EEB000961302 /* CardButton.swift */; };
 		FA30B7722698064200961302 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B7712698064200961302 /* SetGame.swift */; };
 		FA30B775269806B500961302 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30B774269806B500961302 /* Card.swift */; };
+		FA68846C269D46A300B69BEC /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68846B269D46A300B69BEC /* Grid.swift */; };
+		FA68846F269D498D00B69BEC /* SetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68846E269D498D00B69BEC /* SetCardView.swift */; };
+		FA688472269D52B000B69BEC /* SetContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA688471269D52B000B69BEC /* SetContainerView.swift */; };
+		FAD790C926A2915800DB9663 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD790C826A2915800DB9663 /* DefaultButton.swift */; };
+		FAD790CC26A2917700DB9663 /* DealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD790CB26A2917700DB9663 /* DealButton.swift */; };
+		FAD790CF26A2937900DB9663 /* HintButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD790CE26A2937900DB9663 /* HintButton.swift */; };
 		FAEC016426971F8200F9EF86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC016326971F8200F9EF86 /* AppDelegate.swift */; };
 		FAEC016626971F8200F9EF86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC016526971F8200F9EF86 /* SceneDelegate.swift */; };
 		FAEC016826971F8200F9EF86 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC016726971F8200F9EF86 /* ViewController.swift */; };
@@ -21,11 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FA019FB42699667100F56B38 /* DealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealButton.swift; sourceTree = "<group>"; };
-		FA019FBC269979B200F56B38 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
-		FA30B7682697EEB000961302 /* CardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButton.swift; sourceTree = "<group>"; };
 		FA30B7712698064200961302 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		FA30B774269806B500961302 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		FA68846B269D46A300B69BEC /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		FA68846E269D498D00B69BEC /* SetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardView.swift; sourceTree = "<group>"; };
+		FA688471269D52B000B69BEC /* SetContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetContainerView.swift; sourceTree = "<group>"; };
+		FAD790C826A2915800DB9663 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
+		FAD790CB26A2917700DB9663 /* DealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealButton.swift; sourceTree = "<group>"; };
+		FAD790CE26A2937900DB9663 /* HintButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintButton.swift; sourceTree = "<group>"; };
 		FAEC016026971F8200F9EF86 /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEC016326971F8200F9EF86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAEC016526971F8200F9EF86 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,10 +64,13 @@
 		FA30B76B2697EEB900961302 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FAD790C826A2915800DB9663 /* DefaultButton.swift */,
 				FAEC016926971F8200F9EF86 /* Main.storyboard */,
-				FA30B7682697EEB000961302 /* CardButton.swift */,
-				FA019FB42699667100F56B38 /* DealButton.swift */,
-				FA019FBC269979B200F56B38 /* DefaultButton.swift */,
+				FA68846B269D46A300B69BEC /* Grid.swift */,
+				FA68846E269D498D00B69BEC /* SetCardView.swift */,
+				FA688471269D52B000B69BEC /* SetContainerView.swift */,
+				FAD790CB26A2917700DB9663 /* DealButton.swift */,
+				FAD790CE26A2937900DB9663 /* HintButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,13 +186,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA30B7722698064200961302 /* SetGame.swift in Sources */,
+				FAD790CC26A2917700DB9663 /* DealButton.swift in Sources */,
+				FA688472269D52B000B69BEC /* SetContainerView.swift in Sources */,
+				FA68846F269D498D00B69BEC /* SetCardView.swift in Sources */,
 				FA30B775269806B500961302 /* Card.swift in Sources */,
-				FA30B7692697EEB000961302 /* CardButton.swift in Sources */,
+				FAD790C926A2915800DB9663 /* DefaultButton.swift in Sources */,
 				FAEC016826971F8200F9EF86 /* ViewController.swift in Sources */,
-				FA019FB52699667100F56B38 /* DealButton.swift in Sources */,
 				FAEC016426971F8200F9EF86 /* AppDelegate.swift in Sources */,
 				FAEC016626971F8200F9EF86 /* SceneDelegate.swift in Sources */,
-				FA019FBD269979B200F56B38 /* DefaultButton.swift in Sources */,
+				FAD790CF26A2937900DB9663 /* HintButton.swift in Sources */,
+				FA68846C269D46A300B69BEC /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

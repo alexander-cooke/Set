@@ -9,16 +9,16 @@ import Foundation
 
 struct SetGame {
 
-    private var cards = [Card]()
+    private(set) var deck = [Card]()
     private(set) var cardsInPlay = [Card]()
     lazy private(set) var selectedCards =  [Card]()
     private(set) var mostRecentSet = [Card]()
-    private(set) var matchedCardsHistory = [Card]()
+    private(set) var hintCards = [Card]()
     private(set) var score = 0
     
     mutating func dealCards(_ N : Int = 3) {
         for _ in 1...N {
-            if cards.count > 0 {
+            if deck.count > 0 {
                 cardsInPlay += [draw()]
             } else {
                 print("No more cards left to draw")
@@ -28,53 +28,48 @@ struct SetGame {
     }
     
     mutating private func draw() -> Card {
-       return cards.remove(at: cards.count.arc4random)
+       return deck.remove(at: deck.count.arc4random)
     }
     
-    mutating func choseCard(at index : Int) {
-        // If the chosen card is already selected, de-select it.
-        if let index = selectedCards.firstIndex(of: cardsInPlay[index]) {
-            selectedCards.remove(at: index)
+    mutating func choose(card : Card) {
+        if selectedCards.contains(card) {
+            selectedCards.remove(element: card)
         } else {
-            if selectedCards.count < 2 {
-                selectedCards += [cardsInPlay[index]]
-            } else if selectedCards.count == 2 {
-                selectedCards += [cardsInPlay[index]]
-                if selectedCardsFormASet() {
-                    score += 3
-                    mostRecentSet = selectedCards
-                    selectedCards.removeAll()
-                } else {
-                    score -= 5
-                }
-            } else {
-                selectedCards.removeAll()
-                selectedCards += [cardsInPlay[index]]
+            selectedCards.append(card)
+            if selectedCards.count == 3 {
+                let setHasBeenFound = cardsFormASet(selectedCards)
+                score += setHasBeenFound ? 3 : -5
+                mostRecentSet = setHasBeenFound ? selectedCards : mostRecentSet
+            } else if selectedCards.count > 3 {
+                selectedCards = selectedCards.filter{$0 == card}
             }
         }
+        hintCards = []
     }
     
-    mutating func flushMatches() {
+    mutating func flushMatches() -> [Card] {
         if !mostRecentSet.isEmpty {
-            for recentlyMatchedCard in mostRecentSet {
-                if let idx = cardsInPlay.firstIndex(of: recentlyMatchedCard) {
-                    if cards.count > 0 {
-                        cardsInPlay[idx] = draw()
-                    }
+            for card in mostRecentSet {
+                if let idx = cardsInPlay.firstIndex(of: card),
+                   deck.count > 0 {
+                    cardsInPlay[idx] = draw()
+                } else {
+                    cardsInPlay.remove(element: card)
                 }
             }
-            matchedCardsHistory += mostRecentSet
-            mostRecentSet = []
         }
+        let flushed = mostRecentSet
+        mostRecentSet = []
+        return flushed
     }
     
-    mutating func selectedCardsFormASet() -> Bool {
+    mutating func cardsFormASet(_ cards : [Card]) -> Bool {
         var theseCardsFormASet = true
         var arrayOfSets = [Set<Card.PermissableValue>]()
-        arrayOfSets.append(Set(arrayLiteral: selectedCards[0].cardinality, selectedCards[1].cardinality, selectedCards[2].cardinality))
-        arrayOfSets.append(Set(arrayLiteral: selectedCards[0].colour, selectedCards[1].colour, selectedCards[2].colour))
-        arrayOfSets.append(Set(arrayLiteral: selectedCards[0].shape, selectedCards[1].shape, selectedCards[2].shape))
-        arrayOfSets.append(Set(arrayLiteral: selectedCards[0].shading, selectedCards[1].shading, selectedCards[2].shading))
+        arrayOfSets.append(Set(arrayLiteral:   cards[0].cardinality,   cards[1].cardinality,   cards[2].cardinality))
+        arrayOfSets.append(Set(arrayLiteral:   cards[0].colour,   cards[1].colour,   cards[2].colour))
+        arrayOfSets.append(Set(arrayLiteral:   cards[0].shape,   cards[1].shape,   cards[2].shape))
+        arrayOfSets.append(Set(arrayLiteral:   cards[0].shading,   cards[1].shading,   cards[2].shading))
         
         for set in arrayOfSets {
             if set.count != 1 && set.count != 3 {
@@ -84,31 +79,53 @@ struct SetGame {
         return theseCardsFormASet
     }
     
+    mutating func shuffle() {
+        cardsInPlay.shuffle()
+    }
+    
+    mutating func hint() {
+        _ = flushMatches()
+        selectedCards = []
+        if let set = findSet(),
+           hintCards.isEmpty {
+            hintCards = Array(set[0...1])
+            selectedCards = hintCards
+        } else {
+            hintCards = []
+        }
+    }
+    
+    private mutating func findSet() -> [Card]? {
+        for firstCard in cardsInPlay {
+            for secondCard in cardsInPlay {
+                for thirdCard in cardsInPlay {
+                    if firstCard != secondCard &&
+                       secondCard != thirdCard &&
+                        firstCard != thirdCard {
+                        let candidateCards = [firstCard, secondCard, thirdCard]
+                        if cardsFormASet(candidateCards) {
+                            return candidateCards
+                        }
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
     init() {
         let allCases = Card.PermissableValue.allCases
         for cardinality in allCases {
             for colour in allCases {
                 for shape in allCases {
                     for shading in allCases {
-                        cards.append(Card(cardinality: cardinality, colour: colour, shape: shape, shading: shading))
+                        deck.append(Card(cardinality: cardinality, colour: colour, shape: shape, shading: shading))
                     }
                 }
             }
         }
         dealCards(12)
     }
-    
-    
-//    // Tester Init
-//    init() {
-//        var id = 0
-//        let allCases = Card.PermissableValue.allCases
-//        for _ in 0...29 {
-//            cards.append(Card(cardinality: Card.PermissableValue.A, colour: Card.PermissableValue.A, shape: Card.PermissableValue.A, shading: Card.PermissableValue.A, id: id))
-//            id += 1
-//        }
-//        dealCards(12)
-//    }
 }
 
 extension Int {
@@ -119,6 +136,14 @@ extension Int {
             return -Int(arc4random_uniform(UInt32(-self)))
         } else {
             return 0
+        }
+    }
+}
+
+extension Array where Element: Equatable{
+    mutating func remove (element: Element) {
+        if let i = self.firstIndex(of: element) {
+            self.remove(at: i)
         }
     }
 }

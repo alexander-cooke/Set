@@ -8,139 +8,122 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet private var allCardButtons: [CardButton]!
-    @IBOutlet private var mainStacks: [UIStackView]!
-    @IBOutlet private var orientationDependentStacks: [UIStackView]!
-    @IBOutlet private var orientationDependentCards: [UIButton]!
     @IBOutlet var dealButton: DealButton!
     @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet var setContainer: SetContainerView! {
+        didSet {
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dealCards))
+            swipe.direction = .down
+            setContainer.addGestureRecognizer(swipe)
+            
+            let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffle))
+            setContainer.addGestureRecognizer(rotation)
+        }
+    }
     
-    let MAX_NUMBER_OF_CARDS_ON_TABLE = 24
     var game = SetGame()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        handleOrientation()
         updateViewAccordingToModel()
     }
     
     func updateViewAccordingToModel() {
-        let numberOfCardsToDisplay = game.cardsInPlay.count
-        for cardIndex in 0..<allCardButtons.count {
-            let relevantButton = allCardButtons[cardIndex]
-            relevantButton.isEnabled = true
-            relevantButton.alpha = 100.0
-            if cardIndex < numberOfCardsToDisplay {
-                let card = game.cardsInPlay[cardIndex]
-                displayCard(card, on: relevantButton)
-            } else {
-                relevantButton.isEnabled = false
-                relevantButton.alpha = 0.0
-            }
+        var cardViews = [SetCardView]()
+        for card in game.cardsInPlay {
+            let cardView = translateCardModelToView(using: card)
+            cardViews.append(cardView)
         }
+        setContainer.setCardViews = cardViews
         scoreLabel.text = "Score: \(game.score)"
-    }
-    
-    private func displayCard(_ card : Card, on button : CardButton) {
-        let (text, attributes) = getAttributeTuple(for: card)
-        button.setAttributes(text, attributes)
         
-        if game.mostRecentSet.contains(card) {
-            button.showAsMatched(true)
-        } else if game.selectedCards.contains(card) {
-            button.showAsSelected(true)
-        } else {
-            button.showAsSelected(false)
-        }
-        button.isHidden = false
-        
-        if game.matchedCardsHistory.contains(card) {
-            button.isEnabled = false
-            button.alpha = 0.0
+        if game.cardsInPlay.count >= Constants.maxCardsOnTable || game.deck.isEmpty {
+            dealButton.isEnabled = false
+            dealButton.backgroundColor =  #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            dealButton.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
         }
     }
     
-    @IBAction func dealPressed(_ sender: DealButton) {
-        game.dealCards()
+    @objc func cardTapped(_ sender: SetCardView) {
+        let underlyingCardModel = translateCardViewToModel(using: sender)
+        let flushed = game.flushMatches()
+        
+        if !flushed.contains(underlyingCardModel) {
+            game.choose(card: underlyingCardModel)
+        }
         updateViewAccordingToModel()
-        if game.cardsInPlay.count >= MAX_NUMBER_OF_CARDS_ON_TABLE {
-            sender.shouldEnable(false)
-        }
     }
     
-    @IBAction func newGamesPressed(_ sender: UIButton) {
-        game = SetGame()
-        for button in allCardButtons {
-            button.isEnabled = true
-            button.alpha = 100.0
-        }
-        dealButton.shouldEnable(true)
-        updateViewAccordingToModel()
+    private func translateCardViewToModel(using cardView : SetCardView) -> Card {
+        let cardinalityRaw = Card.PermissableValue.RawValue(cardView.number - 1)
+        let colourRaw = Card.PermissableValue.RawValue(Constants.colours.firstIndex(of: cardView.colour)!)
+        let shapeRaw = Card.PermissableValue.RawValue(Constants.shapes.firstIndex(of: cardView.shape)!)
+        let shadingRaw = Card.PermissableValue.RawValue(Constants.shading.firstIndex(of: cardView.shading)!)
         
+        return Card(cardinality: Card.PermissableValue(rawValue: cardinalityRaw)!,
+                    colour: Card.PermissableValue(rawValue: colourRaw)!,
+                    shape: Card.PermissableValue(rawValue: shapeRaw)!,
+                    shading: Card.PermissableValue(rawValue: shadingRaw)!)
     }
     
-    @IBAction func cardButtonPressed(_ sender: CardButton) {
-        game.flushMatches()
-        let idx = allCardButtons.firstIndex(of: sender)
-        
-        if let idx = idx {
-            print(idx)
-            game.choseCard(at: idx)
+    private func translateCardModelToView(using card : Card) -> SetCardView {
+        let cardView = SetCardView()
+        cardView.number = card.cardinality.rawValue + 1
+        cardView.colour = Constants.colours[card.colour.rawValue]
+        cardView.shape = Constants.shapes[card.shape.rawValue]
+        cardView.shading = Constants.shading[card.shading.rawValue]
+        cardView.isSelected = game.selectedCards.contains(card)
+        cardView.isSelectedAndMatched = game.mostRecentSet.contains(card)
+        cardView.isHint = game.hintCards.contains(card)
+        cardView.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
+        return cardView
+    }
+    
+    @objc private func dealCards() {
+        if (game.cardsInPlay.count < Constants.maxCardsOnTable && !game.deck.isEmpty) {
+            game.dealCards()
             updateViewAccordingToModel()
         }
     }
     
-    func getAttributeTuple(for card : Card) -> (String, [NSAttributedString.Key: Any]) {
-        let shapes = ["●", "▲", "■"]
-        let shape = shapes[card.shape.rawValue]
-        let cardinality = card.cardinality.rawValue + 1
-        let text = String(repeating: shape, count: cardinality)
+    @objc private func shuffle(recognizer: UIRotationGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            game.shuffle()
+            updateViewAccordingToModel()
+        default:
+            break
+        }
         
-        let colours = [#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)]
-        let colour = colours[card.colour.rawValue]
-        var attributes = [NSAttributedString.Key: Any]()
-        switch card.shading {
-        case .A:
-            attributes = [.foregroundColor: colour]
-        case .B:
-            attributes = [.foregroundColor: colour, .strokeWidth: 10]
-        case .C:
-            attributes = [.foregroundColor: colour.withAlphaComponent(0.30)]
-        }
-        return (text, attributes)
+    }
+
+    @IBAction func dealPressed(_ sender: DealButton) {
+        dealCards()
     }
     
-//MARK: Handling Orientation (Extra)
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        handleOrientation()
+    @IBAction func newGamesPressed(_ sender: UIButton) {
+        game = SetGame()
+        dealButton.isEnabled = true
+        dealButton.backgroundColor = #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1)
+        dealButton.setTitleColor(.white, for: .normal)
+        updateViewAccordingToModel()
     }
     
-    private func handleOrientation() {
-        if UIDevice.current.orientation.isLandscape {
-            hideOrientationDependentStacks(true)
-            distributeOrientationDependentCards(among: mainStacks)
-        } else {
-            hideOrientationDependentStacks(false)
-            distributeOrientationDependentCards(among: orientationDependentStacks)
-        }
+    @IBAction func hintPressed(_ sender: HintButton) {
+        game.hint()
+        updateViewAccordingToModel()
     }
     
-    private func distributeOrientationDependentCards(among stack : [UIStackView]) {
-        var n = orientationDependentCards.count - 1, idx = 0
-        while n >= 0 {
-            if let btn = orientationDependentCards?[n] {
-                stack[idx].addArrangedSubview(btn)
-                n -= 1
-                idx = (idx + 1) % stack.count
-            }
-        }
-    }
     
-    private func hideOrientationDependentStacks(_ hide : Bool) {
-        for stack in orientationDependentStacks {
-            stack.isHidden = hide
-        }
+    private struct Constants {
+        static let maxCardsOnTable = 24
+        static let colours = [#colorLiteral(red: 1, green: 0.7058823529, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.6509803922, blue: 0.9294117647, alpha: 1), #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1)]
+        static let shapes = [SetCardView.Shape.circle,
+                             SetCardView.Shape.square,
+                             SetCardView.Shape.triangle]
+        static let shading = [SetCardView.Shading.fill,
+                              SetCardView.Shading.outline,
+                              SetCardView.Shading.stripe]
     }
 }
 
