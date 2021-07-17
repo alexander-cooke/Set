@@ -52,13 +52,7 @@ class SetContainerView: UIView {
 extension SetContainerView {
     private struct Constants {
         static let cardInsetAmount : CGFloat = 10
-//        static let ratioOfInsetToBoundsHeight: CGFloat = 5.0
-        
     }
-    
-//    private var cardInsetSize : CGFloat {
-//        bounds.size.height * Constants.ratioOfInsetToBoundsHeight
-//    }
 }
 
 extension Int {

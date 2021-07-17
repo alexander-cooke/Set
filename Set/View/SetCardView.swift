@@ -19,6 +19,7 @@ class SetCardView: UIButton {
     var shape : Shape = .square {didSet{setNeedsDisplay()}}
     var shading : Shading = .fill {didSet{setNeedsDisplay()}}
     var isSelectedAndMatched : Bool = false {didSet{setNeedsDisplay()}}
+    var isHint : Bool = false {didSet{setNeedsDisplay()}}
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,14 +39,11 @@ class SetCardView: UIButton {
         
         let borderPath = roundRect
         var borderColour = isSelected ? #colorLiteral(red: 0.9647058824, green: 0.3176470588, blue: 0.1137254902, alpha: 1) : UIColor.clear
+        borderColour = isHint ? #colorLiteral(red: 1, green: 0.7058823529, blue: 0, alpha: 1) : borderColour
         borderColour = isSelectedAndMatched ? #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1) : borderColour
         borderColour.setStroke()
         borderPath.lineWidth = 10
         borderPath.stroke()
-        
-//        self.layer.borderWidth = 1.0
-//        self.layer.borderColor =
-        
         
         // Get grid size based on cardinality and dimensions of bounds
         let (rows, columns) = bounds.width > bounds.height ? (1, number) : (number, 1)

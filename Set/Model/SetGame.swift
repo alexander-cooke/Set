@@ -13,7 +13,7 @@ struct SetGame {
     private(set) var cardsInPlay = [Card]()
     lazy private(set) var selectedCards =  [Card]()
     private(set) var mostRecentSet = [Card]()
-    private(set) var matchedCardsHistory = [Card]()
+    private(set) var hintCards = [Card]()
     private(set) var score = 0
     
     mutating func dealCards(_ N : Int = 3) {
@@ -37,13 +37,14 @@ struct SetGame {
         } else {
             selectedCards.append(card)
             if selectedCards.count == 3 {
-                let setHasBeenFound = selectedCardsFormASet()
+                let setHasBeenFound = cardsFormASet(selectedCards)
                 score += setHasBeenFound ? 3 : -5
                 mostRecentSet = setHasBeenFound ? selectedCards : mostRecentSet
             } else if selectedCards.count > 3 {
                 selectedCards = selectedCards.filter{$0 == card}
             }
         }
+        hintCards = []
     }
     
     mutating func flushMatches() -> [Card] {
@@ -62,13 +63,13 @@ struct SetGame {
         return flushed
     }
     
-    mutating func selectedCardsFormASet() -> Bool {
+    mutating func cardsFormASet(_ cards : [Card]) -> Bool {
         var theseCardsFormASet = true
         var arrayOfSets = [Set<Card.PermissableValue>]()
-//        arrayOfSets.append(Set(arrayLiteral: selectedCards[0].cardinality, selectedCards[1].cardinality, selectedCards[2].cardinality))
-//        arrayOfSets.append(Set(arrayLiteral: selectedCards[0].colour, selectedCards[1].colour, selectedCards[2].colour))
-        arrayOfSets.append(Set(arrayLiteral: selectedCards[0].shape, selectedCards[1].shape, selectedCards[2].shape))
-//        arrayOfSets.append(Set(arrayLiteral: selectedCards[0].shading, selectedCards[1].shading, selectedCards[2].shading))
+        arrayOfSets.append(Set(arrayLiteral:   cards[0].cardinality,   cards[1].cardinality,   cards[2].cardinality))
+        arrayOfSets.append(Set(arrayLiteral:   cards[0].colour,   cards[1].colour,   cards[2].colour))
+        arrayOfSets.append(Set(arrayLiteral:   cards[0].shape,   cards[1].shape,   cards[2].shape))
+        arrayOfSets.append(Set(arrayLiteral:   cards[0].shading,   cards[1].shading,   cards[2].shading))
         
         for set in arrayOfSets {
             if set.count != 1 && set.count != 3 {
@@ -76,6 +77,37 @@ struct SetGame {
             }
         }
         return theseCardsFormASet
+    }
+    
+    mutating func shuffle() {
+        cardsInPlay.shuffle()
+    }
+    
+    mutating func hint() {
+        _ = flushMatches()
+        selectedCards = []
+        if let set = findSet() {
+            hintCards = Array(set[0...1])
+            selectedCards = hintCards
+        }
+    }
+    
+    private mutating func findSet() -> [Card]? {
+        for firstCard in cardsInPlay {
+            for secondCard in cardsInPlay {
+                for thirdCard in cardsInPlay {
+                    if firstCard != secondCard &&
+                       secondCard != thirdCard &&
+                        firstCard != thirdCard {
+                        let candidateCards = [firstCard, secondCard, thirdCard]
+                        if cardsFormASet(candidateCards) {
+                            return candidateCards
+                        }
+                    }
+                }
+            }
+        }
+        return nil
     }
     
     init() {

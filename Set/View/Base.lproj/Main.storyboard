@@ -16,52 +16,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="rLH-Ex-o6n" userLabel="stackHeader">
-                                <rect key="frame" x="8" y="59.999999999999993" width="398" height="27.666666666666664"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1qB-Kd-oXN">
+                                <rect key="frame" x="10" y="44" width="394" height="69"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6D-et-bV4" userLabel="ScoreLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="89" height="27.666666666666668"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="j6D-et-bV4" userLabel="ScoreLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" red="0.1058823529" green="0.14901960780000001" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e68-zw-i68" userLabel="newGameButton" customClass="DefaultButton" customModule="Set" customModuleProvider="target">
-                                        <rect key="frame" x="148" y="0.0" width="95" height="27.666666666666668"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                        <state key="normal" title="New Game"/>
-                                        <connections>
-                                            <action selector="newGamesPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dl8-so-18r"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-O4-H8U" userLabel="dealButton" customClass="DealButton" customModule="Set" customModuleProvider="target">
-                                        <rect key="frame" x="295" y="0.0" width="103" height="27.666666666666668"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rLH-Ex-o6n" userLabel="stackHeader">
+                                        <rect key="frame" x="0.0" y="34" width="394" height="35"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e68-zw-i68" userLabel="newGameButton" customClass="DefaultButton" customModule="Set" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="124.66666666666667" height="35"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                                <state key="normal" title="New"/>
+                                                <connections>
+                                                    <action selector="newGamesPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dl8-so-18r"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbs-LF-1bk" userLabel="hintButton" customClass="HintButton" customModule="Set" customModuleProvider="target">
+                                                <rect key="frame" x="134.66666666666666" y="0.0" width="124.66666666666666" height="35"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                                <state key="normal" title="Hint"/>
+                                                <connections>
+                                                    <action selector="hintPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KP9-a7-nmu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-O4-H8U" userLabel="dealButton" customClass="DealButton" customModule="Set" customModuleProvider="target">
+                                                <rect key="frame" x="269.33333333333331" y="0.0" width="124.66666666666669" height="35"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                                <state key="normal" title="Deal">
+                                                    <color key="titleColor" systemColor="linkColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="dealPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9jp-0i-HZ5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                        <state key="normal" title="Deal 3 More">
-                                            <color key="titleColor" systemColor="linkColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="dealPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9jp-0i-HZ5"/>
-                                        </connections>
-                                    </button>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="J5V-X8-g2M"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ss-xS-FMt" userLabel="SetContainerView" customClass="SetContainerView" customModule="Set" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="95.666666666666686" width="414" height="766.33333333333326"/>
+                                <rect key="frame" x="0.0" y="113" width="414" height="749"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="1qB-Kd-oXN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7To-Vr-bNp"/>
                             <constraint firstItem="0ss-xS-FMt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Enm-GW-rvM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1qB-Kd-oXN" secondAttribute="trailing" constant="10" id="Ktk-6c-jeF"/>
+                            <constraint firstItem="1qB-Kd-oXN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="YMu-8I-VvU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0ss-xS-FMt" secondAttribute="bottom" id="hen-c4-6wn"/>
-                            <constraint firstItem="0ss-xS-FMt" firstAttribute="top" secondItem="rLH-Ex-o6n" secondAttribute="bottom" constant="8" symbolic="YES" id="lb6-um-fsq"/>
                             <constraint firstItem="0ss-xS-FMt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nqd-wx-6Ee"/>
-                            <constraint firstItem="rLH-Ex-o6n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="tnd-4D-P6l"/>
-                            <constraint firstItem="rLH-Ex-o6n" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="vzs-KA-iaq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rLH-Ex-o6n" secondAttribute="trailing" constant="8" id="xeu-76-fp7"/>
+                            <constraint firstItem="0ss-xS-FMt" firstAttribute="top" secondItem="1qB-Kd-oXN" secondAttribute="bottom" id="xwp-ph-LNq"/>
                         </constraints>
                     </view>
                     <connections>

@@ -10,7 +10,16 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet var dealButton: DealButton!
     @IBOutlet var scoreLabel: UILabel!
-    @IBOutlet var setContainer: SetContainerView!
+    @IBOutlet var setContainer: SetContainerView! {
+        didSet {
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dealCards))
+            swipe.direction = .down
+            setContainer.addGestureRecognizer(swipe)
+            
+            let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffle))
+            setContainer.addGestureRecognizer(rotation)
+        }
+    }
     
     var game = SetGame()
 
@@ -18,7 +27,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         updateViewAccordingToModel()
     }
-
+    
     func updateViewAccordingToModel() {
         var cardViews = [SetCardView]()
         for card in game.cardsInPlay {
@@ -45,21 +54,6 @@ class ViewController: UIViewController {
         updateViewAccordingToModel()
     }
     
-//    let buttonIdx = setContainer.setCardViews.firstIndex(of: sender)
-//        if var buttonIdx = buttonIdx {
-//            let (ranOutOfCards, indexes) = game.flushMatches()
-//            if ranOutOfCards {
-//                print(indexes)
-//                switch buttonIdx {
-//                case (indexes[0] + 1)..<indexes[1]:
-//                    buttonIdx -= 1
-//                case (indexes[1] + 1)..<indexes[2]:
-//                    buttonIdx -= 2
-//                default:
-//                    buttonIdx -= 3
-//                }
-//            }
-    
     private func translateCardViewToModel(using cardView : SetCardView) -> Card {
         let cardinalityRaw = Card.PermissableValue.RawValue(cardView.number - 1)
         let colourRaw = Card.PermissableValue.RawValue(Constants.colours.firstIndex(of: cardView.colour)!)
@@ -80,13 +74,31 @@ class ViewController: UIViewController {
         cardView.shading = Constants.shading[card.shading.rawValue]
         cardView.isSelected = game.selectedCards.contains(card)
         cardView.isSelectedAndMatched = game.mostRecentSet.contains(card)
+        cardView.isHint = game.hintCards.contains(card)
         cardView.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
         return cardView
     }
+    
+    @objc private func dealCards() {
+        if (game.cardsInPlay.count < Constants.maxCardsOnTable && !game.deck.isEmpty) {
+            game.dealCards()
+            updateViewAccordingToModel()
+        }
+    }
+    
+    @objc private func shuffle(recognizer: UIRotationGestureRecognizer) {
+        switch recognizer.state {
+        case .ended:
+            game.shuffle()
+            updateViewAccordingToModel()
+        default:
+            break
+        }
+        
+    }
 
     @IBAction func dealPressed(_ sender: DealButton) {
-        game.dealCards()
-        updateViewAccordingToModel()
+        dealCards()
     }
     
     @IBAction func newGamesPressed(_ sender: UIButton) {
@@ -97,8 +109,14 @@ class ViewController: UIViewController {
         updateViewAccordingToModel()
     }
     
+    @IBAction func hintPressed(_ sender: HintButton) {
+        game.hint()
+        updateViewAccordingToModel()
+    }
+    
+    
     private struct Constants {
-        static let maxCardsOnTable = 12
+        static let maxCardsOnTable = 24
         static let colours = [#colorLiteral(red: 1, green: 0.7058823529, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.6509803922, blue: 0.9294117647, alpha: 1), #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1)]
         static let shapes = [SetCardView.Shape.circle,
                              SetCardView.Shape.square,
