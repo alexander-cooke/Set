@@ -86,9 +86,12 @@ struct SetGame {
     mutating func hint() {
         _ = flushMatches()
         selectedCards = []
-        if let set = findSet() {
+        if let set = findSet(),
+           hintCards.isEmpty {
             hintCards = Array(set[0...1])
             selectedCards = hintCards
+        } else {
+            hintCards = []
         }
     }
     
