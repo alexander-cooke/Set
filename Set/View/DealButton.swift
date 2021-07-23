@@ -10,7 +10,19 @@ import UIKit
 class DealButton: DefaultButton {
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = #colorLiteral(red: 0.4980392157, green: 0.7215686275, blue: 0, alpha: 1)
+        enable()
+    }
+    
+    func disable() {
+        self.isEnabled = false
+        self.backgroundColor = Colours.Bg.disabled
+        self.setTitleColor(Colours.Title.disabled, for: .normal)
+    }
+    
+    func enable() {
+        self.isEnabled = true
+        self.backgroundColor = Colours.Deal.bgEnable
+        self.setTitleColor(Colours.Title.enabled, for: .normal)
     }
 
 }

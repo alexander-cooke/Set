@@ -10,7 +10,7 @@ import UIKit
 class HintButton: DefaultButton {
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = #colorLiteral(red: 1, green: 0.7058823529, blue: 0, alpha: 1)
+        self.backgroundColor = Colours.Hint.bg
     }
 
 
